@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+$support-ie6: false;
+$support-ie7: false;
+$support-ie8: false;
+$support-ie9: false;
+$experimental-support-for-microsoft: false;
+$experimental-support-for-opera: false;
+$experimental-support-for-mozilla: false;
+$experimental-support-for-pie: false;
+
+@import "compass";
+
+fieldset{
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+input[type="checkbox"]{
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+}
+
+input[type="checkbox"] + label{
+	display: block;
+	&:before{
+		display: inline-block;
+		content: " ";
+		margin-right: 5px;
+		width: 16px;
+		height: 16px;
+		background-repeat: no-repeat;
+		background-position: left top;
+		@include background-size(16px auto);
+		vertical-align: top;
+	}
+}
+
+input[type="checkbox"] + label:before{
+	background-image: url(../images/check.png);
+	background-position: left top;
+}
+
+input[type="checkbox"]:checked + label:before{
+	background-position: left bottom;
+}
+
+.container{
+	margin: 10px;
+	.csstransitions &{
+		@include transition-property(margin);
+		@include transition-duration(0.75s);
+	}
+}
+
+.form__multipleselector{
+	border: 1px solid #999;
+	.form__multipleselector-choices{
+		position: relative;
+		padding: 10px 35px 10px 10px;
+		min-height: 1.6em;
+		cursor: pointer;
+		&:after{
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: 15px;
+			margin-top: -3px;
+			border-width: 3px 3px 0 0;
+			border-style: solid;
+			border-color: #555;
+			width: 5px;
+			height: 5px;
+			content: " ";
+			@include transform(rotate(45deg));
+		}
+	}
+	.form__multipleselector-item{
+		display: inline-block;
+		margin: 2px 5px 2px 0;
+		padding: 5px;
+		border-radius: 3px;
+		background-color: green;
+		color: #fff;
+	}
+}
+
+.multipleselect{
+	$border-color: #999;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 10px 0;
+	border-top: 8px solid #555;
+	width: 100%;
+	.csstransitions &{
+		display: block;
+		visibility: hidden;
+		opacity: 0;
+		@include transition-property(all);
+		@include transition-duration(0.5s);
+		@include transition-timing-function(linear);
+	}
+	&.is-visible{
+		visibility: visible;
+		opacity: 1;
+		// Smartphone white screen problem.
+		// See Also: http://stackoverflow.com/questions/7548833/ios-css-opacity-visibility-transition 
+		@include transition-property(opacity);
+	}
+	ul{
+		padding: 0;
+		border-bottom: 1px solid $border-color;
+	}
+	li{
+		position: relative;
+		border-width: 1px 1px 0;
+		border-style: solid;
+		border-color: $border-color;
+		list-style: none;
+		line-height: 1;
+	}
+	label{
+		display: inline-block;
+		padding: 10px;
+		cursor: pointer;
+	}
+	input:checked + label{
+		background-color: #fceec9;
+	}
+}
+
+// For Debug
+body{
+	height: 1500px;
+}
+
+#field_cities{
+	margin-top: 300px;
+}

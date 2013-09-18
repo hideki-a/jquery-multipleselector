@@ -1,2 +1,2 @@
-jquery-multipleselector
-=======================
+jQuery MultipleSelector Plugin
+=========================

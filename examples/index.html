@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery MultipleSelector Plugin Example</title>
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/basic.css">
+</head>
+<body>
+<div class="container">
+<main role="main">
+<h1>jQuery MultipleSelector Plugin Example</h1>
+<p>機能確認のため、bodyの高さ・fieldset間の余白を大きく設定してあります。</p>
+
+<form action="#" method="get" class="form">
+<fieldset>
+<legend>診療科目</legend>
+<div class="form__multipleselector js-multipleselector" data-dialog-id="specialities">
+<div class="form__multipleselector-choices">診療科目を選択</div>
+<div class="form__multipleselector-data">
+</div><!-- /.form__multipleselector-data -->
+</div><!-- /.form__multipleselector -->
+</fieldset>
+
+<fieldset id="field_cities">
+<legend>市区町村</legend>
+<div class="form__multipleselector js-multipleselector" data-dialog-id="cities">
+<div class="form__multipleselector-choices">市区町村を選択</div>
+<div class="form__multipleselector-data">
+</div><!-- /.form__multipleselector-data -->
+</div><!-- /.form__multipleselector -->
+</fieldset>
+
+<p><input type="submit" value="送信"></p>
+</form>
+</main>
+</div><!-- /.container -->
+
+<div id="specialities" class="multipleselect" role="dialog">
+<h2>診療科目の選択</h2>
+<ul class="multipleselect__checkboxes">
+<li><input type="checkbox" name="specialities[]" id="specialities_1" value="1"><label for="specialities_1">内科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_2" value="2"><label for="specialities_2">胃腸科・胃腸内科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_3" value="3"><label for="specialities_3">消化器内科・消化器科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_4" value="4"><label for="specialities_4">泌尿器科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_5" value="5"><label for="specialities_5">循環器内科・循環器科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_6" value="6"><label for="specialities_6">呼吸器内科・呼吸器科</label></li>
+<li><input type="checkbox" name="specialities[]" id="specialities_7" value="7"><label for="specialities_7">脳神経内科</label></li>
+</ul>
+<p><input type="button" value="決定" class="multipleselect__btn-close"></p>
+</div><!-- /#specialities -->
+
+<div id="cities" class="multipleselect" role="dialog">
+<h2>市区町村の選択</h2>
+<ul class="multipleselect__checkboxes">
+<li><input type="checkbox" name="cities[]" id="cities_1" value="1" checked><label for="cities_1">福山市</label></li>
+<li><input type="checkbox" name="cities[]" id="cities_2" value="2"><label for="cities_2">府中市</label></li>
+<li><input type="checkbox" name="cities[]" id="cities_3" value="3"><label for="cities_3">尾道市</label></li>
+<li><input type="checkbox" name="cities[]" id="cities_4" value="4"><label for="cities_4">三原市</label></li>
+</ul>
+<p><input type="button" value="決定" class="multipleselect__btn-close"></p>
+</div><!-- /#cities -->
+
+<script src="../lib/jquery-loader.js"></script>
+<script src="../src/jquery.multipleselector.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
