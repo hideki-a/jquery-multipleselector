@@ -4,8 +4,8 @@
  * Copyright 2013 Hideki Abe <hideki.abe@skyward-design.net>
  * Released under the MIT license
  *
- * Version: 0.1.0
- * Date: 2013-09-18
+ * Version: 0.1.1
+ * Date: 2013-09-20
  */
 ;(function ($, window, document, undefined) {
     "use strict";
