@@ -37,7 +37,6 @@
         this.placeholder = "";
         this.useCssAnimation = false;
         this.isDialogOpen = false;
-        this.isAnimate = false;
 
         this._defaults = defaults;
         this._name = pluginName;
@@ -57,23 +56,17 @@
         },
 
         containerTransitionEnd: function () {
-            if (this.isDialogOpen) {
-                this.isDialogOpen = false;
-            } else if (this.isAnimate) {
-                $window.scrollTop(1);
-                this.$dialog.addClass("is-visible").focus();
-                this.isDialogOpen = true;
-                this.isAnimate = false;
-            }
+            this.$container.off("webkitTransitionEnd transitionend");
+            $window.scrollTop(1);
+            this.$dialog.addClass("is-visible").focus();
+            this.isDialogOpen = true;
         },
 
         dialogTranstionEnd: function () {
-            if (this.isAnimate && this.isDialogOpen) {
-                $window.scrollTop(this.scrollTop + 1);    // +1px ... Android 2.3 bug.
-                this.$container.css("marginLeft", this.options.containerSpace / 2);
-                // Set isDialogOpen flag ... see containerTransitionEnd function.
-                this.isAnimate = false;
-            }
+            this.$dialog.off("webkitTransitionEnd transitionend");
+            $window.scrollTop(this.scrollTop + 1);    // +1px ... Android 2.3 bug.
+            this.$container.css("marginLeft", this.options.containerSpace / 2);
+            this.isDialogOpen = false;
         },
 
         openDialog: function (e) {
@@ -83,7 +76,7 @@
             this.scrollTop = $window.scrollTop();
 
             if (this.useCssAnimation) {
-                this.isAnimate = true;
+                this.$container.on("webkitTransitionEnd transitionend", $.proxy(this.containerTransitionEnd, this));
                 this.$container.css("marginLeft", this.screenWidth * -1);
             } else {
                 this.$container.animate(
@@ -102,7 +95,7 @@
             e.preventDefault();
 
             if (this.useCssAnimation) {
-                this.isAnimate = true;
+                this.$dialog.on("webkitTransitionEnd transitionend", $.proxy(this.dialogTranstionEnd, this));
                 this.$dialog.removeClass("is-visible");
             } else {
                 this.$dialog.fadeOut(function () {
@@ -163,8 +156,6 @@
             if (this.options.cssAnimation && ("WebkitTransition" in style || "transition" in style)) {
                 this.useCssAnimation = true;
                 $("html").addClass("csstransitions");
-                this.$container.on("webkitTransitionEnd transitionend", $.proxy(this.containerTransitionEnd, this));
-                this.$dialog.on("webkitTransitionEnd transitionend", $.proxy(this.dialogTranstionEnd, this));
             }
         }
     };
